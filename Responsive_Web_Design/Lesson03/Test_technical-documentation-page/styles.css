@@ -1,0 +1,58 @@
+#main-doc {
+    display: flex;
+    background-color: darkgray;
+    padding: 20px 0;
+}
+
+#navbar {
+    flex: 1;
+    font-size: 20px;
+}
+
+.content {
+    flex: 6;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin-right: 5px;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: black;
+}
+
+#navbar a:hover {
+    color: red;
+}
+
+#navbar li {
+    border: 2px solid black;
+    padding: 10px 0;
+}
+
+.main-section {
+    margin: 10px;
+    border-bottom: 1px solid blue;
+}
+
+.main-section header {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+  

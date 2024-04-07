@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1 id="title">Form khảo sát cho vui</h1>
+    <p id="description"><em>Cảm ơn bạn đã bỏ phí thời gian để điền form khảo sát này</em></p>
+
+    <form method="post" id="survey-form" action='https://register-demo.freecodecamp.org'>
+      <fieldset>
+        <label id="name-label" for="name">Name: <input id="name" name="name" type="text" placeholder="Enter your name" required /></label>
+        <label id="email-label" for="email">Email: <input id="email" name="email" type="email" placeholder="Enter your email" required /></label>
+        <label id="number-label" for="number">Age: <input id="number" name="number" type="number" min="13" max="120" placeholder="Enter your age" required /></label>
+      </fieldset>
+
+      <fieldset>
+        <label for="dropdown">What do you want?
+            <select id="dropdown" name="dropdown">
+              <option value="">Select one please</option>
+              <option value="1">Money</option>
+              <option value="2">Girl friend</option>
+              <option value="3">Foods</option>
+              <option value="4">Nothing</option>
+            </select>
+          </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>What do you do best? (required)</legend>
+        <label for="student-opt"><input id="student-opt" type="radio" name="account-type" class="inline" value="student" checked /> Student</label>
+        <label for="teacher-opt"><input id="teacher-opt" type="radio" name="account-type" class="inline" value="teacher" /> Teacher</label>
+        <label for="other-opt"><input id="other-opt" type="radio" name="account-type" class="inline" value="other" /> Other</label>
+      </fieldset>
+
+      <fieldset>
+        <label>How do you feel?</label>
+        <label for="student-opt"><input id="student-opt" type="checkbox" name="account-type" class="inline" value="happy" /> Happy</label>
+        <label for="teacher-opt"><input id="teacher-opt" type="checkbox" name="account-type" class="inline" value="sad" /> Sad</label>
+        <label for="other-opt"><input id="other-opt" type="checkbox" name="account-type" class="inline" value="hehe" /> Hehe</label>
+      </fieldset>
+
+      <fieldset>
+        <label for="profile-picture">Upload a profile picture: <input id="profile-picture" type="file" name="file" /></label>
+        <label for="age">Input your age (years): <input id="age" type="number" name="age" min="13" max="120" /></label>
+        <label for="bio">Provide a bio:
+          <textarea id="bio" name="bio" rows="3" cols="30" placeholder="I like coding on the beach..."></textarea>
+        </label>
+      </fieldset>
+
+      <label for="terms-and-conditions">
+        <input class="inline" id="terms-and-conditions" value="terms" type="checkbox" required name="terms-and-conditions" /> I accept the <a href="https://www.freecodecamp.org/news/terms-of-service/">terms and conditions</a>
+      </label>
+      <input id="submit" type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
