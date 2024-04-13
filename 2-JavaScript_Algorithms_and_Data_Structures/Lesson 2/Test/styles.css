@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #1b1b32;
+}
+
+main {
+    color: white;
+}
+
+header h1 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 50px;
+}
+
+#input {
+    border-radius: 15px;
+    border: 2px solid yellow;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    margin: 0 auto;
+    background-color: darkslategray;
+    margin-bottom: 40px;
+}
+
+#input label {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+#input #number {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+#convert-btn {
+    background-color: aqua;
+    width: fit-content;
+    font-size: 20px;
+    padding: 5px 10px;
+    border-radius: 10px 0 10px 0;
+    border: 2px solid #1b1b32;
+}
+
+#convert-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+#output {
+    border-radius: 15px;
+    border: 2px solid yellow;
+    padding: 10px;
+    width: 40%;
+    margin: 0 auto;
+    background-color: darkslategray;
+    display: none;
+    overflow-wrap: break-word;
+    /* Hoặc có thể sử dụng word-wrap: break-word; */
+}
+
+.output-active {
+    display: block !important;
+}
