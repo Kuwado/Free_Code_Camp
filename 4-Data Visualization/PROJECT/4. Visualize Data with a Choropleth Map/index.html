@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choropleth Map</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+        }
+
+        #content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px;
+            background-color: aqua;
+            border-radius: 50px 0 50px 0;
+            margin-top: 10px;
+        }
+        /* Style for counties */
+        .county {
+            stroke: #fff;
+        }
+
+        /* Tooltip style */
+        #tooltip {
+            position: absolute;
+            background: #f4f4f4;
+            padding: 10px;
+            border: #333 1px solid;
+            border-radius: 5px;
+            display: none;
+        }
+
+        /* Style for legend */
+        #legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend-item span {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <h1 id="title">US County Education Data</h1>
+        <p id="description">Description goes here</p>
+        <svg id="choropleth"></svg>
+        <div id="tooltip"></div>
+        <div id="legend"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+    <script>
+        // Fetching and parsing data
+        Promise.all([
+            fetch('https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json').then(response => response.json()),
+            fetch('https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json').then(response => response.json())
+        ])
+            .then(data => {
+                const educationData = data[0];
+                const countyData = data[1];
+
+                // Set up SVG element
+                const w = 1000;
+                const h = 600;
+                const padding = 50;
+
+                const svg = d3.select("#choropleth")
+                    .attr("width", w)
+                    .attr("height", h);
+
+                // Create color scale
+                const colorScale = d3.scaleQuantize()
+                    .domain([d3.min(educationData, d => d.bachelorsOrHigher), d3.max(educationData, d => d.bachelorsOrHigher)])
+                    .range(d3.schemeBlues[5]);
+
+                // Create tooltip
+                const tooltip = d3.select("#tooltip");
+
+                // Draw counties
+                svg.selectAll(".county")
+                    .data(topojson.feature(countyData, countyData.objects.counties).features)
+                    .enter()
+                    .append("path")
+                    .attr("class", "county")
+                    .attr("d", d3.geoPath())
+                    .attr("fill", d => {
+                        const county = educationData.find(item => item.fips === d.id);
+                        return county ? colorScale(county.bachelorsOrHigher) : "#ccc";
+                    })
+                    .attr("data-fips", d => d.id)
+                    .attr("data-education", d => {
+                        const county = educationData.find(item => item.fips === d.id);
+                        return county ? county.bachelorsOrHigher : 0;
+                    })
+                    .on("mouseover", function (event, d) {
+                        const tooltip = document.getElementById("tooltip");
+                        tooltip.style.display = "block";
+                        tooltip.style.left = event.pageX + "px";
+                        tooltip.style.top = event.pageY + "px";
+                        const county = educationData.find(item => item.fips === d.id);
+                        tooltip.setAttribute("data-education", county ? county.bachelorsOrHigher : 0);
+                        tooltip.innerHTML = `${county ? county.area_name + ", " + county.state + ": " + county.bachelorsOrHigher + "%" : "No data available"}`;
+                    })
+
+                    .on("mouseout", () => {
+                        tooltip.style.display = "none";
+                    });
+
+                // Create legend
+                const legendColors = colorScale.range();
+                const legendWidth = 30;
+
+                const legend = d3.select("#legend")
+                    .selectAll(".legend-item")
+                    .data(legendColors)
+                    .enter()
+                    .append("div")
+                    .attr("class", "legend-item");
+
+                legend.append("div")
+                    .style("background-color", d => d)
+                    .style("width", legendWidth + "px")
+                    .style("height", "20px");
+
+                legend.append("span")
+                    .text((d, i) => {
+                        const range = colorScale.invertExtent(d);
+                        return `${Math.round(range[0])}% - ${Math.round(range[1])}%`;
+                    });
+            });
+    </script>
+</body>
+
+</html>

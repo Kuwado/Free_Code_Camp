@@ -1,0 +1,20 @@
+[
+    {
+      "id":0,
+        "imageLink":"https://cdn.freecodecamp.org/curriculum/legacy-json-apis-ajax/funny-cat.jpg",
+        "altText":"A white cat wearing a green helmet shaped melon on its head. ",
+        "codeNames":[ "Juggernaut", "Mrs. Wallace", "Buttercup"]
+    },
+    {
+        "id":1,
+          "imageLink":"https://cdn.freecodecamp.org/curriculum/legacy-json-apis-ajax/funny-cat.jpg",
+          "altText":"A white cat wearing a green helmet shaped melon on its head 1. ",
+          "codeNames":[ "Juggernaut", "Mrs. Wallace", "Buttercup"]
+      },
+      {
+        "id":2,
+          "imageLink":"https://cdn.freecodecamp.org/curriculum/legacy-json-apis-ajax/funny-cat.jpg",
+          "altText":"A white cat wearing a green helmet shaped melon on its head 2. ",
+          "codeNames":[ "Juggernaut", "Mrs. Wallace", "Buttercup"]
+      }
+  ]

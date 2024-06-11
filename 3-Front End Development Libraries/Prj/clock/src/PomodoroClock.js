@@ -70,7 +70,7 @@ const adjustLength = (type, value) => {
       }
       if (type === 'session' && sessionLength + value > 0 && sessionLength + value <= 60) {
         setSessionLength((prevSessionLength) => prevSessionLength + value);
-        setTimeLeft((prevTimeLeft) => (timerLabel === 'Session' ? (prevSessionLength + value) * 60 : prevTimeLeft));
+        setTimeLeft((prevTimeLeft) => (timerLabel === 'Session' ? (sessionLength + value) * 60 : prevTimeLeft));
       }
     }
   };

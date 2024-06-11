@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.js"></script>
+</head>
+<style>
+    .bar {
+        width: 25px;
+        height: 100px;
+        display: inline-block;
+        background-color: blue;
+        margin: 2px;
+    }
+</style>
+
+<body>
+    <ul>
+        <li>Example</li>
+        <li>Example</li>
+        <li>Example</li>
+    </ul>
+    <script>
+        const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+        d3.select("body").selectAll("h2")
+            .data(dataset)
+            .enter()
+            .append("h2")
+            // Dùng dữ liệu
+            .text((d) => (d + " USD"))
+        // Thêm css
+        d3.selectAll("h2").style("color", (c) => {
+            if (c < 20) return "red";
+            else return "green"
+        })
+
+        d3.select("body").selectAll("div")
+            .data(dataset)
+            .enter()
+            .append("div")
+            // Thêm class
+            .attr("class", "bar")
+            // Set chiều cao
+            .style("height", (d) => (10 * d + "px"))
+
+        const w = 500;
+        const h = 100;
+        const svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+        svg.selectAll("rect")
+            .data(dataset)
+            .enter()
+            .append("rect")
+            .attr("x", (d, i) => i * 30)
+            .attr("y", (d, i) => h - 3*d)
+            .attr("width", 25)
+            .attr("height", (d, i) => 3 * d)
+            .attr("fill", "navy");
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>
